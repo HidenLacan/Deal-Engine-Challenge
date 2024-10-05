@@ -7,9 +7,11 @@ const flighdata = './data/challenge_dataset (1).csv';
 // API
 const NodeCache = require("node-cache");
 const axios = require("axios");
-const apiKey = "fea13a5f826fec0c960b98ffd1e902a9";
 //Cache
 const cache = new NodeCache();
+/// Key 
+require('dotenv').config();
+const apiKey = process.env.apiKey;
 
 //// Function to get data weather from Weather API
 const getWeather = async(latitude,longitude) =>{
