@@ -47,6 +47,7 @@ El objetivo es entregar un informe climático con los datos de 3 mil vuelos, obt
   - `node-cache`: para manejar el almacenamiento en caché.
 
 ## Instalación
+(nota) es necesario obtener una API key gratuita en el portal de OpenWeather el cual se puede conseguir aquí https://openweathermap.org/api/one-call-3
 
 1. Clona el repositorio y navega al directorio del proyecto:
 2. Instala las dependencias correspondientes.
