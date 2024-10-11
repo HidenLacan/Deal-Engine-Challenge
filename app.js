@@ -4,6 +4,7 @@ const fs = require('fs');
 const csv = require('csv-parser');
 // Data
 const flighdata = './data/challenge_dataset (1).csv';
+const flighdatajson = './weatherReports.json';
 // API
 const NodeCache = require("node-cache");
 const axios = require("axios");
@@ -96,10 +97,33 @@ const processFlights = async() =>{
 };
 
 
+// function to  filter for altitude max and min for each flight 
+const getFilterAll =  async ( flights,maxLat,minLat) => {
+
+  const filterFlights = flights.filter(flight => {
+    const originLatitude = flight.originAirport.latitude;
+    const destinationLatitude = flight.destinationAirport.latitude;
+
+    return (
+      (originLatitude >= minLat && originLatitude <= maxLat) || 
+      (destinationLatitude >= minLat && destinationLatitude <= maxLat)
+    );
+
+  });
+
+  return filterFlights;
+
+};
+
 const test  = async () =>{
-  const reports = await processFlights();
-  console.log(reports);
+
+  const reports = await getFlightData();
+  const maxLatitude = 32 ;
+  const minLatitude = 31 ;
+  const filteredFunction = await getFilterAll(reports,maxLatitude,minLatitude) 
+  console.log(filteredFunction);
 }
+
 
 const main = async () => {
     const reports = await processFlights();
@@ -109,4 +133,8 @@ const main = async () => {
 
 test();
 
-main();
+
+
+
+
+//main();
