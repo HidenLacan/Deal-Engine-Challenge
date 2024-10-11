@@ -14,6 +14,9 @@ const cache = new NodeCache();
 require('dotenv').config();
 const apiKey = process.env.apiKey;
 
+
+let peticionesApi = 0;
+
 //// Function to get data weather from Weather API
 const getWeather = async(latitude,longitude) =>{
 
@@ -23,6 +26,7 @@ const getWeather = async(latitude,longitude) =>{
     }
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=sp`;
     try {
+        peticionesApi++;
         const response = await axios.get(url);
         const weatherData = response.data;
         cache.set(`${latitude},${longitude}`, weatherData, 3600); // Guardar en caché por 1 hora
@@ -122,6 +126,7 @@ const test  = async () =>{
   const minLatitude = 31 ;
   const filteredFunction = await getFilterAll(reports,maxLatitude,minLatitude) 
   console.log(filteredFunction);
+  console.log(peticionesApi)
 }
 
 
@@ -132,9 +137,5 @@ const main = async () => {
 };
 
 test();
+main();
 
-
-
-
-
-//main();
